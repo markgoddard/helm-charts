@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -11,11 +12,22 @@ permissions:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    env:
+      # This is the version of spiffe-helm-charts-hardened that will be added to the release.
+      COFIDE_SPIRE_HELM_VERSION: "spire-0.26.0-cofide.0"
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
+      - name: Checkout the Cofide SPIRE chart repo
+        run: |
+          # Clone the repository into a temporary directory
+          git clone --depth 1 --branch ${{ env.COFIDE_SPIRE_HELM_VERSION }} https://github.com/cofide/spiffe-helm-charts-hardened tmp_spiffe_charts_repo
+          # Move the specific SPIRE chart
+          mv tmp_spiffe_charts_repo/charts/spire charts/spire
+          rm -rf tmp_spiffe_charts_repo
 
       - name: Configure Git
         run: |
@@ -34,10 +46,17 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Commit chart changes
+        run: |
+          # Add the SPIRE chart to git and commit to the local branch
+          git add charts/spire/
+          git commit -m "Add the Cofide SPIRE chart"
+
       - name: Run chart-releaser to package and release Helm charts
         uses: helm/chart-releaser-action@v1.7.0
         with:
           charts_dir: charts
+          skip_existing: true
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
 
