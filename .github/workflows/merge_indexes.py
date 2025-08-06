@@ -1,13 +1,19 @@
 #!/usr/bin/env python3
 
-import yaml
-import sys
+from ruamel.yaml import YAML
 from pathlib import Path
+import sys
+
+# Initialize YAML processor with better formatting
+yaml = YAML()
+yaml.preserve_quotes = True
+yaml.width = 4096  # Prevent line wrapping
+yaml.default_flow_style = False
 
 # Start with current index or empty structure
 try:
     with open('index.yaml', 'r') as f:
-        merged = yaml.safe_load(f) or {}
+        merged = yaml.load(f) or {}
 except FileNotFoundError:
     merged = {'apiVersion': 'v1', 'entries': {}}
 
@@ -19,16 +25,16 @@ if 'entries' not in merged:
 for index_file in Path('temp-indexes').glob('*-index.yaml'):
     try:
         with open(index_file, 'r') as f:
-            remote_index = yaml.safe_load(f)
-            
+            remote_index = yaml.load(f)
+
         if remote_index and 'entries' in remote_index:
             for chart_name, versions in remote_index['entries'].items():
                 if chart_name not in merged['entries']:
                     merged['entries'][chart_name] = []
-                
+
                 # Add versions, avoiding duplicates
                 existing_versions = {v.get('version'): v for v in merged['entries'][chart_name]}
-                
+
                 for version in versions:
                     version_num = version.get('version')
                     if version_num not in existing_versions:
@@ -39,10 +45,10 @@ for index_file in Path('temp-indexes').glob('*-index.yaml'):
 # Sort versions for each chart (newest first)
 for chart_name in merged['entries']:
     merged['entries'][chart_name].sort(
-        key=lambda x: x.get('created', ''), 
+        key=lambda x: x.get('created', ''),
         reverse=True
     )
 
-# Write merged index
+# Write merged index preserving original formatting
 with open('index.yaml', 'w') as f:
-    yaml.dump(merged, f, default_flow_style=False, sort_keys=True)
+    yaml.dump(merged, f)
