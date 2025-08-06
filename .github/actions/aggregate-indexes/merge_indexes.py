@@ -24,7 +24,7 @@ if 'entries' not in merged:
 
 # Merge each remote index
 for index_file in Path('temp-indexes').glob('*-index.yaml'):
-    print("Merging {index_file}")
+    print(f"Merging {index_file}")
     try:
         with open(index_file, 'r') as f:
             remote_index = yaml.load(f)
@@ -32,6 +32,7 @@ for index_file in Path('temp-indexes').glob('*-index.yaml'):
         if remote_index and 'entries' in remote_index:
             for chart_name, versions in remote_index['entries'].items():
                 if chart_name not in merged['entries']:
+                    print(f"Adding chart {chart_name} to index")
                     merged['entries'][chart_name] = []
 
                 # Add versions, avoiding duplicates
@@ -40,6 +41,7 @@ for index_file in Path('temp-indexes').glob('*-index.yaml'):
                 for version in versions:
                     version_num = version.get('version')
                     if version_num not in existing_versions:
+                        print(f"Adding chart {chart_name} version {version_num} to index")
                         merged['entries'][chart_name].append(version)
     except Exception as e:
         print(f"Error processing {index_file}: {e}")
