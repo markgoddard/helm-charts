@@ -1,0 +1,60 @@
+apiVersion: v1
+entries:
+  cofide-agent:
+  - apiVersion: v2
+    appVersion: v0.28.0
+    created: "2025-08-06T11:19:54.706676993Z"
+    description: Helm chart to deploy the Cofide Agent to a Kubernetes cluster
+    digest: 7b0d3a23a7013d7e6fbf0cd79a7593b0235c9513b3eec4ace76d7462f7e78db4
+    maintainers:
+    - name: Cofide
+      url: https://cofide.io
+    name: cofide-agent
+    type: application
+    urls:
+    - https://github.com/markgoddard/helm-charts/releases/download/cofide-agent-0.3.2/cofide-agent-0.3.2.tgz
+    version: 0.3.2
+  cofide-connect:
+  - apiVersion: v2
+    appVersion: v0.27.0
+    created: "2025-08-06T11:19:54.837370337Z"
+    description: A Helm chart to deploy the Cofide Connect server to a Kubernetes
+      cluster
+    digest: 99201ce34c2678d8e039156cdcea949daec0b4d9e0587912902fa3ea054873eb
+    maintainers:
+    - name: Cofide
+      url: https://cofide.io
+    name: cofide-connect
+    type: application
+    urls:
+    - https://github.com/markgoddard/helm-charts/releases/download/cofide-connect-0.2.2/cofide-connect-0.2.2.tgz
+    version: 0.2.2
+  cofide-observer:
+  - apiVersion: v2
+    appVersion: v0.3.0
+    created: "2025-08-06T11:19:54.969738669Z"
+    description: Helm chart to deploy Cofide Observer
+    digest: b5a05a0cef634e2033ce855f44587e164e131d49905461c8382fbddfc6bb32a6
+    maintainers:
+    - name: Cofide
+      url: https://cofide.io
+    name: cofide-observer
+    type: application
+    urls:
+    - https://github.com/markgoddard/helm-charts/releases/download/cofide-observer-0.3.0/cofide-observer-0.3.0.tgz
+    version: 0.3.0
+  spiffe-enable:
+  - apiVersion: v2
+    appVersion: v0.2.2
+    created: "2025-08-06T11:19:55.10606773Z"
+    description: Helm chart for the spiffe-enable admission webhook for Kubernetes
+    digest: 979a6be08c2f3e0c009b427fbc3de4d55f10017710f18d127997d982702953c6
+    maintainers:
+    - name: Cofide
+      url: https://cofide.io
+    name: spiffe-enable
+    type: application
+    urls:
+    - https://github.com/markgoddard/helm-charts/releases/download/spiffe-enable-0.1.2/spiffe-enable-0.1.2.tgz
+    version: 0.1.2
+generated: "2025-08-06T11:19:55.106074243Z"
