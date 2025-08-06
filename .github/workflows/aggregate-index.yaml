@@ -1,0 +1,17 @@
+name: Aggregate Helm Index
+on:
+  #schedule:
+  #  - cron: '0 */6 * * *'  # Every 6 hours
+  workflow_dispatch:
+  repository_dispatch:
+    types: [charts-updated]
+
+jobs:
+  aggregate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Aggregate Helm Index
+        uses: markgoddard/helm-charts/.github/actions/aggregate-index@main
+        with:
+          repository: ${{ github.event.client_payload.repository }}
+          changed_charts: ${{ github.event.client_payload.changed_charts }}
