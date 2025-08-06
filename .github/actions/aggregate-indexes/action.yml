@@ -1,4 +1,4 @@
-name: "Aggregate Indexes"
+name: "Aggregate Helm Indexes"
 description: "Aggregate Helm indexes for remote Helm charts into a single index.yaml"
 author: "Cofide"
 inputs:     
