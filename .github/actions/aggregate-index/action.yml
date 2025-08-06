@@ -1,5 +1,5 @@
-name: "Merge Indexes"
-description: "Merge Helm indexes for remote Helm charts into an aggregated index.yaml"
+name: "Aggregate Indexes"
+description: "Aggregate Helm indexes for remote Helm charts into a single index.yaml"
 author: "Cofide"
 inputs:     
   repository:
