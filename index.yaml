@@ -18,8 +18,8 @@ entries:
   - apiVersion: v2
     appVersion: v0.27.0
     created: "2025-08-06T11:19:54.837370337Z"
-    description: A Helm chart to deploy the Cofide Connect server to a Kubernetes
-      cluster
+    description: A Helm chart to deploy the Cofide Connect server to a 
+      Kubernetes cluster
     digest: 99201ce34c2678d8e039156cdcea949daec0b4d9e0587912902fa3ea054873eb
     maintainers:
     - name: Cofide
@@ -47,7 +47,8 @@ entries:
   - apiVersion: v2
     appVersion: v0.2.2
     created: "2025-08-06T11:19:55.10606773Z"
-    description: Helm chart for the spiffe-enable admission webhook for Kubernetes
+    description: Helm chart for the spiffe-enable admission webhook for 
+      Kubernetes
     digest: 979a6be08c2f3e0c009b427fbc3de4d55f10017710f18d127997d982702953c6
     maintainers:
     - name: Cofide
@@ -58,6 +59,88 @@ entries:
     - https://github.com/markgoddard/helm-charts/releases/download/spiffe-enable-0.1.2/spiffe-enable-0.1.2.tgz
     version: 0.1.2
   spire:
+  - annotations:
+      artifacthub.io/category: security
+      artifacthub.io/license: Apache-2.0
+    apiVersion: v2
+    appVersion: 1.12.4
+    created: "2025-08-06T15:26:46.870624Z"
+    dependencies:
+    - name: spire-lib
+      repository: file://./charts/spire-lib
+      version: 0.1.0
+    - condition: spire-server.enabled
+      name: spire-server
+      repository: file://./charts/spire-server
+      version: 0.1.0
+    - condition: spire-agent.enabled
+      name: spire-agent
+      repository: file://./charts/spire-agent
+      version: 0.1.0
+    - alias: upstream-spire-agent
+      condition: upstream.enabled
+      name: spire-agent
+      repository: file://./charts/spire-agent
+      version: 0.1.0
+    - condition: spiffe-csi-driver.enabled
+      name: spiffe-csi-driver
+      repository: file://./charts/spiffe-csi-driver
+      version: 0.1.0
+    - alias: upstream-spiffe-csi-driver
+      condition: upstream.enabled
+      name: spiffe-csi-driver
+      repository: file://./charts/spiffe-csi-driver
+      version: 0.1.0
+    - condition: spiffe-oidc-discovery-provider.enabled
+      name: spiffe-oidc-discovery-provider
+      repository: file://./charts/spiffe-oidc-discovery-provider
+      version: 0.1.0
+    - condition: tornjak-frontend.enabled
+      name: tornjak-frontend
+      repository: file://./charts/tornjak-frontend
+      version: 0.1.0
+    - condition: spike-keeper.enabled
+      name: spike-keeper
+      repository: file://./charts/spike-keeper
+      version: 0.1.0
+    - condition: spike-nexus.enabled
+      name: spike-nexus
+      repository: file://./charts/spike-nexus
+      version: 0.1.0
+    - condition: spike-pilot.enabled
+      name: spike-pilot
+      repository: file://./charts/spike-pilot
+      version: 0.1.0
+    description: 'A Helm chart for deploying the complete Spire stack including: spire-server,
+      spire-agent, spiffe-csi-driver, spiffe-oidc-discovery-provider and spire-controller-manager. '
+    digest: 74fa66fde395486c511f8636f82892b5e9beb34b55b491c81a34df3ee9b6e973
+    home: https://github.com/spiffe/helm-charts-hardened/tree/main/charts/spire
+    icon: https://spiffe.io/img/logos/spire/icon/color/spire-icon-color.png
+    keywords:
+    - spiffe
+    - spire
+    - spire-server
+    - spire-agent
+    - oidc
+    - spire-controller-manager
+    kubeVersion: '>=1.21.0-0'
+    maintainers:
+    - email: marco.franssen@gmail.com
+      name: marcofranssen
+      url: https://marcofranssen.nl
+    - email: Kevin.Fox@pnnl.gov
+      name: kfox1111
+    - email: fymemon@yahoo.com
+      name: faisal-memon
+    - email: edwbuck@gmail.com
+      name: edwbuck
+    name: spire
+    sources:
+    - https://github.com/spiffe/helm-charts-hardened/tree/main/charts/spire
+    type: application
+    urls:
+    - https://github.com/markgoddard/spiffe-helm-charts-hardened/releases/download/spire-0.26.0-cofide.4/spire-0.26.0-cofide.4.tgz
+    version: 0.26.0-cofide.4
   - annotations:
       artifacthub.io/category: security
       artifacthub.io/license: Apache-2.0
@@ -140,4 +223,86 @@ entries:
     urls:
     - https://github.com/markgoddard/spiffe-helm-charts-hardened/releases/download/spire-0.26.0-cofide.0/spire-0.26.0-cofide.0.tgz
     version: 0.26.0-cofide.0
+  - annotations:
+      artifacthub.io/category: security
+      artifacthub.io/license: Apache-2.0
+    apiVersion: v2
+    appVersion: 1.12.4
+    created: "2025-08-06T14:49:35.324004327Z"
+    dependencies:
+    - name: spire-lib
+      repository: file://./charts/spire-lib
+      version: 0.1.0
+    - condition: spire-server.enabled
+      name: spire-server
+      repository: file://./charts/spire-server
+      version: 0.1.0
+    - condition: spire-agent.enabled
+      name: spire-agent
+      repository: file://./charts/spire-agent
+      version: 0.1.0
+    - alias: upstream-spire-agent
+      condition: upstream.enabled
+      name: spire-agent
+      repository: file://./charts/spire-agent
+      version: 0.1.0
+    - condition: spiffe-csi-driver.enabled
+      name: spiffe-csi-driver
+      repository: file://./charts/spiffe-csi-driver
+      version: 0.1.0
+    - alias: upstream-spiffe-csi-driver
+      condition: upstream.enabled
+      name: spiffe-csi-driver
+      repository: file://./charts/spiffe-csi-driver
+      version: 0.1.0
+    - condition: spiffe-oidc-discovery-provider.enabled
+      name: spiffe-oidc-discovery-provider
+      repository: file://./charts/spiffe-oidc-discovery-provider
+      version: 0.1.0
+    - condition: tornjak-frontend.enabled
+      name: tornjak-frontend
+      repository: file://./charts/tornjak-frontend
+      version: 0.1.0
+    - condition: spike-keeper.enabled
+      name: spike-keeper
+      repository: file://./charts/spike-keeper
+      version: 0.1.0
+    - condition: spike-nexus.enabled
+      name: spike-nexus
+      repository: file://./charts/spike-nexus
+      version: 0.1.0
+    - condition: spike-pilot.enabled
+      name: spike-pilot
+      repository: file://./charts/spike-pilot
+      version: 0.1.0
+    description: 'A Helm chart for deploying the complete Spire stack including: spire-server,
+      spire-agent, spiffe-csi-driver, spiffe-oidc-discovery-provider and spire-controller-manager. '
+    digest: dc141a8e7f82d8cc1335627e23de66b1b0ceee62a3074104a35b854c3f83be01
+    home: https://github.com/spiffe/helm-charts-hardened/tree/main/charts/spire
+    icon: https://spiffe.io/img/logos/spire/icon/color/spire-icon-color.png
+    keywords:
+    - spiffe
+    - spire
+    - spire-server
+    - spire-agent
+    - oidc
+    - spire-controller-manager
+    kubeVersion: '>=1.21.0-0'
+    maintainers:
+    - email: marco.franssen@gmail.com
+      name: marcofranssen
+      url: https://marcofranssen.nl
+    - email: Kevin.Fox@pnnl.gov
+      name: kfox1111
+    - email: fymemon@yahoo.com
+      name: faisal-memon
+    - email: edwbuck@gmail.com
+      name: edwbuck
+    name: spire
+    sources:
+    - https://github.com/spiffe/helm-charts-hardened/tree/main/charts/spire
+    type: application
+    urls:
+    - https://github.com/markgoddard/spiffe-helm-charts-hardened/releases/download/spire-0.26.0-cofide.3/spire-0.26.0-cofide.3.tgz
+    version: 0.26.0-cofide.3
 generated: "2025-08-06T14:53:39.317091157+01:00"
