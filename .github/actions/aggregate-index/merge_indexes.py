@@ -7,7 +7,6 @@ import sys
 # Initialize YAML processor with better formatting
 yaml = YAML()
 yaml.preserve_quotes = True  # Match double quotes used by cr/helm
-yaml.width = 80  # Match line wrapping of cr/helm
 yaml.default_flow_style = False
 
 # Start with current index or empty structure
