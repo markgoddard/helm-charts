@@ -42,10 +42,10 @@ runs:
         if git diff --staged --quiet; then
           echo "No changes to commit"
         else
-          git commit -m "Update aggregated helm index\
-        \
-        Triggers:\
-        * Repository: ${{ inputs.repository }}\
+          git commit -m "Update aggregated helm index
+
+        Triggers:
+        * Repository: ${{ inputs.repository }}
         * Changed charts: ${{ inputs.changed_charts }}"
           git push
         fi
