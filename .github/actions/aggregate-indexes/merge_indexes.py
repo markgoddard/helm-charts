@@ -13,7 +13,9 @@ yaml.default_flow_style = False
 try:
     with open('index.yaml', 'r') as f:
         merged = yaml.load(f) or {}
+    print("Found existing index.yaml")
 except FileNotFoundError:
+    print("No existing index.yaml")
     merged = {'apiVersion': 'v1', 'entries': {}}
 
 # Ensure entries dict exists
@@ -22,6 +24,7 @@ if 'entries' not in merged:
 
 # Merge each remote index
 for index_file in Path('temp-indexes').glob('*-index.yaml'):
+    print("Merging {index_file}")
     try:
         with open(index_file, 'r') as f:
             remote_index = yaml.load(f)
@@ -40,6 +43,7 @@ for index_file in Path('temp-indexes').glob('*-index.yaml'):
                         merged['entries'][chart_name].append(version)
     except Exception as e:
         print(f"Error processing {index_file}: {e}")
+        sys.exit(1)
 
 # Sort versions for each chart (newest first)
 for chart_name in merged['entries']:
@@ -51,3 +55,5 @@ for chart_name in merged['entries']:
 # Write merged index preserving original formatting
 with open('index.yaml', 'w') as f:
     yaml.dump(merged, f)
+
+print("Index merged successfully")

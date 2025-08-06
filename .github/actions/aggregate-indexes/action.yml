@@ -26,11 +26,20 @@ runs:
         curl --fail -L -o temp-indexes/spiffe-helm-charts-hardened-index.yaml \
           https://markgoddard.github.io/spiffe-helm-charts-hardened/index.yaml
         
-    - name: Merge remote indexes with local
+    - name: Install ruamel.yaml
       shell: bash
       run: |
         pip install ruamel.yaml
+
+    - name: Merge remote indexes with local
+      shell: bash
+      run: |
         python3 ${{ github.action_path }}/merge_indexes.py
+
+    - name: Show changes to index.yaml
+      shell: bash
+      run: |
+        git diff
 
     - name: Commit and push updated index
       shell: bash
